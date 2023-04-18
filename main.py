@@ -1,10 +1,10 @@
 import discord
 from discord.ext import commands
-import muisc
+import music
 import random
 import aiohttp
 from settings import *
-cogs = [muisc]
+cogs = [music]
 intents = discord.Intents.all()
 intents.voice_states = True
 bot = commands.Bot(command_prefix='-',intents=intents)
