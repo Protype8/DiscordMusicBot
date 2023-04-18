@@ -1,0 +1,9 @@
+discord
+pafy
+pytube
+youtube-dl
+yt-dlp
+PyNaCl
+ffmpeg
+spotipy
+selenium
