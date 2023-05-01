@@ -143,8 +143,13 @@ class music(commands.Cog):
         musicInfo = self.guilds[ctx.guild.id]
         if not ctx.voice_client:
           return
-        musicInfo.queue = [musicInfo.queue[0]]+musicInfo.queue[skip_amount-1:]
-        musicInfo.names = [musicInfo.names[0]]+musicInfo.names[skip_amount-1:]
+        if(musicInfo.looping):
+          skip_amount = skip_amount%musicInfo.loop_songs
+          musicInfo.queue = musicInfo.queue[skip_amount-1:musicInfo.loop_songs]+musicInfo.queue[skip_amount-1:]+musicInfo.queue[musicInfo.loop_songs]
+          musicInfo.names = musicInfo.names[skip_amount-1:musicInfo.loop_songs] + musicInfo.names[skip_amount - 1:] + musicInfo.names[musicInfo.loop_songs]
+        else:
+          musicInfo.queue = musicInfo.queue[skip_amount-1:]
+          musicInfo.names = musicInfo.names[skip_amount-1:]
         if(ctx.voice_client.is_playing() or ctx.voice_client.is_paused()):
             await ctx.send("Song Skipped")
             ctx.voice_client.stop()
